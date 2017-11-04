@@ -19,10 +19,34 @@ function getPositionMoney(position) {
   }
 }
 
+function isSendingToJail(position) {
+  switch (position) {
+    case 30:
+      return true;
+    case 2:
+    case 7:
+    case 17:
+    case 22:
+    case 33:
+    case 36:
+      return getRandomInteger(0, 2) === 0;
+    default:
+      return false;
+  }
+}
+
 function playTurn(player) {
-  const diceValue = getRandomInteger(1, 7);
-  player.position = (player.position + diceValue) % 40;
-  player.money += getPositionMoney(player.position);
+  if (player.inJail) {
+    player.inJail = false;
+  } else {
+    const diceValue = getRandomInteger(1, 7);
+    player.position = (player.position + diceValue) % 40;
+    player.money += getPositionMoney(player.position);
+    if (isSendingToJail(player.position)) {
+      player.position = 10;
+      player.inJail = true;
+    }
+  }
 }
 
 const playerNames = ['Alicia', 'Bob', 'Cheryl'];
