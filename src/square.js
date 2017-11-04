@@ -19,6 +19,9 @@ class SquareGo {
 }
 
 class SquareTax {
+  constructor(taxAmount) {
+    this.taxAmount = taxAmount;
+  }
   getGain() {
     return -this.taxAmount;
   }
@@ -45,38 +48,17 @@ class SquareSendingToJail {
   }
 }
 
-function getTaxAmount(position) {
-  switch(position) {
-    case 4:
-      return200;
-    return squareTax;
-  case 12:
-    squareTax.taxAmount = -150;
-    return squareTax;
-  case 28:
-    squareTax.taxAmount = -150;
-  case 38:
-    return 75;
-  default:
-    return 0;
-  }
-}
-
 function getSquare(position) {
-  const squareTax = new SquareTax();
   switch (position) {
     case 0:
       return new SquareGo();
     case 4:
-      squareTax.taxAmount = -200;
-      return squareTax;
+      return new SquareTax(200);
     case 12:
     case 28:
-      squareTax.taxAmount = -150;
-      return squareTax;
+      return new SquareTax(150);
     case 38:
-      squareTax.taxAmount = -75;
-      return squareTax;
+      return new SquareTax(75);
     case 30:
       return new SquareSendingToJail();
     case 2:
