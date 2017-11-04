@@ -5,10 +5,24 @@ function isGameFinished(playerList) {
   return playerList.filter(p => !p.isBankrupted()).length !== 1;
 }
 
+function getPositionMoney(position) {
+  switch (position) {
+    case 0:
+      return 200;
+    case 4:
+    case 12:
+    case 28:
+    case 38:
+      return -150;
+    default:
+      return 0;
+  }
+}
+
 function playTurn(player) {
   const diceValue = getRandomInteger(1, 7);
   player.position = (player.position + diceValue) % 40;
-  player.money -= getRandomInteger(0, 300);
+  player.money += getPositionMoney(player.position);
 }
 
 const playerNames = ['Alicia', 'Bob', 'Cheryl'];
