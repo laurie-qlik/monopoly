@@ -1,13 +1,14 @@
 const Player = require('./player');
+const { getRandomInteger } = require('./utils');
 
 function isGameFinished(playerList) {
   return playerList.filter(p => !p.isBankrupted()).length !== 1;
 }
 
 function playTurn(player) {
-  const diceValue = Math.floor(6 * Math.random()) + 1;
+  const diceValue = getRandomInteger(1, 7);
   player.position = (player.position + diceValue) % 40;
-  player.money -= Math.floor(300 * Math.random());
+  player.money -= getRandomInteger(0, 300);
 }
 
 const playerNames = ['Alicia', 'Bob', 'Cheryl'];
