@@ -20,7 +20,7 @@ class SquareGo {
 
 class SquareTax {
   getGain() {
-    return -150;
+    return -this.taxAmount;
   }
   isSendingToJail() {
     return false;
@@ -45,15 +45,38 @@ class SquareSendingToJail {
   }
 }
 
+function getTaxAmount(position) {
+  switch(position) {
+    case 4:
+      return200;
+    return squareTax;
+  case 12:
+    squareTax.taxAmount = -150;
+    return squareTax;
+  case 28:
+    squareTax.taxAmount = -150;
+  case 38:
+    return 75;
+  default:
+    return 0;
+  }
+}
+
 function getSquare(position) {
+  const squareTax = new SquareTax();
   switch (position) {
     case 0:
       return new SquareGo();
     case 4:
+      squareTax.taxAmount = -200;
+      return squareTax;
     case 12:
     case 28:
+      squareTax.taxAmount = -150;
+      return squareTax;
     case 38:
-      return new SquareTax();
+      squareTax.taxAmount = -75;
+      return squareTax;
     case 30:
       return new SquareSendingToJail();
     case 2:
